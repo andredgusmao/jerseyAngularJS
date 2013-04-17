@@ -5,7 +5,10 @@ import br.com.agendabelem.persistencia.FestaDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -54,6 +57,29 @@ public class FestaService {
             }
         }
         return resultado;
+    }
+    
+//    @POST
+//    @Path("/novo")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Festa novaFesta(@FormParam("nome") String nome, 
+//           @FormParam("valor") String valor, @FormParam("imagem") String imagem) {
+//        Festa f = new Festa(nome, new Integer(valor));
+//        f.setImagem(imagem);
+//        dao.salvar(f);
+//        return f;
+//    }
+    
+    @POST
+    @Path("/novo")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Festa novaFesta(Festa festa) {
+        Festa f = festa;
+        System.out.println("----> " + festa);
+        dao.salvar(f);
+        return f;
     }
     
 }

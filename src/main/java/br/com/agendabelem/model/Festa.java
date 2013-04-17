@@ -21,6 +21,7 @@ public class Festa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String imagem;
     private int valor;
 
     public Festa(String nome, int valor) {
@@ -52,6 +53,14 @@ public class Festa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     @Override

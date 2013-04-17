@@ -1,0 +1,10 @@
+<form method="post" ng-submit="salvar()">
+    <input type="text" name="nome" ng-model="festa.nome" />
+    <input type="text" name="valor" ng-model="festa.valor" />
+    <input type="file" name="file" size="45" />
+    
+    <input type="text" id="file" name="imagem" disabled="true" ng-model="festa.imagem" />
+    <input type="button" value="Upload" ng-click="upload(upCallback)"/>
+    
+    <input type="submit" value="Salvar" />
+</form>

@@ -5,5 +5,6 @@ angular.module('agendabelem', []).
             when('/', {templateUrl: 'partials/inicial.html', controller: FestaListCtrl}).
             when('/festa/:festaId', {templateUrl: 'partials/festa-detalhes.html', controller: FestaDetalhesCtrl}).
             when('/upload', {templateUrl: 'partials/upload.html', controller: FestaUploadCtrl}).
+            when('/nova', {templateUrl: 'partials/nova.html', controller: FestaNovaCtrl}).
             otherwise({redirectTo: '/'});
     }]);

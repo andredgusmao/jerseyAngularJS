@@ -43,6 +43,47 @@ function FestaUploadCtrl($scope, $http) {
           data: src,
           show: true
         };
+        j('#file').val(src);
+    };
+}
+
+function FestaNovaCtrl($scope, $http, $location) {
+    $scope.festa = {
+        nome: "Festa",
+        valor: 10,
+        imagem: ""
+    };
+    $scope.salvar = function() {
+      $http({
+          method: 'POST',
+          url: url + "festa/novo",
+          data: $scope.festa
+      }).
+      success(function(data) {
+        $location.path("/");
+      });
+    };
+    $scope.upload = function(callback) {
+        var input = document.querySelector('input[type=file]'),
+            src = "";
+            file = input.files[0];
+        if (!file || !file.type.match(/image.*/)) return;
+        
+        var fd = new FormData();
+        fd.append("file", file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url + "file/upload");
+        xhr.onloadend = function(e) {
+            src = xhr.responseText;
+            callback(src);
+        };
+        
+        xhr.send(fd);
+    };
+    $scope.upCallback = function(src) {
+        $scope.festa.imagem = src;
+        j('#file').val(src);
     };
 }
 
