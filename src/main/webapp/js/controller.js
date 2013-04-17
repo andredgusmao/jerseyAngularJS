@@ -15,32 +15,34 @@ function FestaDetalhesCtrl($scope, $http, $routeParams) {
     });
 }
 
-function FestaUploadCtrl($scope, $http) {    
-    $scope.upload = function() {
-        var form = j("#upload-form");
-        j.ajax({
-            url: url + "file/upload",
-            type: 'POST',
-            data: form.serialize(),
-            dataType: 'application/octet-stream',
-            async: false,
-            success: function (data) {
-                $scope.data = data;
-            },
-            error: function(data, status) {
-                $scope.data = data;
-                $scope.status = status;                
-            }
-        });
+function FestaUploadCtrl($scope, $http) {
+    $scope.image = {
+      data: "",
+      show: false
+    };
+    $scope.upload = function(callback) {
+        var input = document.querySelector('input[type=file]'),
+            src = "";
+            file = input.files[0];
+        if (!file || !file.type.match(/image.*/)) return;
         
+        var fd = new FormData();
+        fd.append("file", file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url + "file/upload");
+        xhr.onloadend = function(e) {
+            src = xhr.responseText;
+            callback(src);
+        };
         
-//        $http.post(url + "file/upload").
-//        success(function(data, status, headers, config) {
-//            $scope.data = data;
-//        }).error(function(data, status, headers, config) {
-//            $scope.data = data;
-//            $scope.status = status;
-//        });
+        xhr.send(fd);
+    };
+    $scope.upCallback = function(src) {
+        $scope.image = {
+          data: src,
+          show: true
+        };
     };
 }
 

@@ -1,12 +1,10 @@
 <h1>Upload de Arquivo com Jersey</h1>
 
-<form ng-submit="upload()" id="upload-form" enctype="application/octet-stream" method="post">
+<form ng-submit="upload(upCallback)" id="upload-form" enctype="multipart/form-data" method="post">
    <p>Selecione o arquivo: <input type="file" name="file" size="45" /></p>
 
 
    <input type="submit" value="Enviar" />
 </form>
 
-{{status}}
-
-{{data}}
+<img ng-src="{{image.data}}" width="220" height="200" ng-show="image.show"/>

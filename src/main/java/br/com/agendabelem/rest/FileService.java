@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 
 /*
@@ -28,20 +29,21 @@ public class FileService {
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.TEXT_HTML)
     public Response uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
 
-            String uploadedFileLocation = "/home/andre/Diretorio/uploads/" + fileDetail.getFileName();
+            String uploadedFileLocation = "/home/andre/NetBeansProjects/AgendaBelem/src/main/webapp/uploads/" + fileDetail.getFileName();
 //            InputStream uploadedInputStream = request.getInputStream();
             
             // save it
             writeToFile(uploadedInputStream, uploadedFileLocation);
-
-            String output = "File uploaded to : " + uploadedFileLocation;
+            
+            String output = "uploads/" + fileDetail.getFileName();
+//            String output = "<img src='" + src + "' width='150' height='150' />";
 
             return Response.status(200).entity(output).build();
-
     }
 
     // save uploaded file to new location
